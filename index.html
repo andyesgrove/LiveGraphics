@@ -24,44 +24,42 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      z-index: 1;
+    }
 
+    .overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
     }
 
     .clock {
-      position: absolute;
-      top: 200px;
-      right: 20px;
       background: rgba(0, 0, 0, 0.6);
       color: #fff;
       font-size: 36px;
       font-family: 'Courier New', Courier, monospace;
       padding: 10px 20px;
       border-radius: 10px;
-      z-index: 10;
-
+      margin-bottom: 20px;
     }
 
     .message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       color: white;
       font-size: 48px;
       font-family: Arial, sans-serif;
-      text-align: center;
       pointer-events: none;
-      z-index: 5;
-
     }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://i.postimg.cc/j5QZmW2Y/test-A.png" alt="Background Image">
-    <div class="clock" id="clock">00:00:00</div>
-    <div class="message" id="message"></div>
+    <div class="overlay">
+      <div class="clock" id="clock">00:00:00</div>
+      <div class="message" id="message">Loading...</div>
+    </div>
   </div>
 
   <script>
@@ -79,21 +77,18 @@
       const minutes = now.getMinutes();
       const messageElement = document.getElementById("message");
 
-      // Example: Show message at 15:00
-      if (hours === 14 && minutes === 10) {
-        messageElement.textContent = "🎉 It's 2:10 PM!";
+      if (hours === 14 && minutes === 30) {
+        messageElement.textContent = "🎉 It's 2:30 PM!";
       } else {
-        messageElement.textContent = "lunch time";
+        messageElement.textContent = "lunch 219";
       }
     }
 
-    // Run both functions every second
     setInterval(() => {
       updateClock();
       showMessageAtTime();
     }, 1000);
 
-    // Initial call
     updateClock();
     showMessageAtTime();
   </script>
