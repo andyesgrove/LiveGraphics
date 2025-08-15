@@ -20,13 +20,13 @@
       const currentMinute = now.getMinutes();
 
       // Set your target time here (e.g., 15:00 for 3:00 PM)
-      const targetHour = 13;
-      const targetMinute = 35;
+      const targetHour = 14;
+      const targetMinute = 00;
 
       if (currentHour === targetHour && currentMinute === targetMinute) {
-        document.getElementById("message").textContent = "🎉 It's 3:00 PM! Time to celebrate!";
+        document.getElementById("message").textContent = "🎉 It's 2:00 PM! Time to celebrate!";
       } else {
-        document.getElementById("message").textContent = "⏳ Waiting for 13:35 PM...";
+        document.getElementById("message").textContent = "⏳ Waiting for 2:00 PM...";
       }
     }
 
