@@ -1,38 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Time-Based Message</title>
+  <meta charset="UTF-8">
+  <title>Image with Clock and Message</title>
   <style>
-    #message {
-      font-size: 24px;
-      color: #333;
-      margin-top: 20px;
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      width: 1080px;
+      height: 1080px;
+    }
+
+    .container img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .clock {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 36px;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 48px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div id="message"></div>
+  <div class="container">
+    <img src="https://i.postimg.cc/j5QZmW2Y/test-A.png" alt="Background Image">
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="message" id="message"></div>
+  </div>
 
   <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
     function showMessageAtTime() {
       const now = new Date();
-      const currentHour = now.getHours();
-      const currentMinute = now.getMinutes();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const messageElement = document.getElementById("message");
 
-      // Set your target time here (e.g., 15:00 for 3:00 PM)
-      const targetHour = 14;
-      const targetMinute = 00;
-
-      if (currentHour === targetHour && currentMinute === targetMinute) {
-        document.getElementById("message").textContent = "🎉 It's 2:00 PM! Time to celebrate!";
+      // Example: Show message at 15:00
+      if (hours === 14 && minutes === 10) {
+        messageElement.textContent = "🎉 It's 2:10 PM!";
       } else {
-        document.getElementById("message").textContent = "⏳ Waiting for 2:00 PM...";
+        messageElement.textContent = "lunch time";
       }
     }
 
-    // Check every minute
-    setInterval(showMessageAtTime, 1000);
-    showMessageAtTime(); // Run immediately on load
+    // Run both functions every second
+    setInterval(() => {
+      updateClock();
+      showMessageAtTime();
+    }, 1000);
+
+    // Initial call
+    updateClock();
+    showMessageAtTime();
   </script>
 </body>
 </html>
