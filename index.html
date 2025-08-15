@@ -2,49 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Clock & Time-Based Message</title>
+  <title>Clock & Message Overlay</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      width: 1080px;
+      height: 1080px;
+      overflow: hidden;
       font-family: Arial, sans-serif;
-      background: url('https://i.postimg.cc/3x3QzSGq/background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      height: 100vh;
+      background: #000;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       color: white;
+      text-align: center;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+      z-index: 10;
+      pointer-events: none;
     }
 
     #clock {
-      font-size: 3em;
+      font-size: 48px;
       margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border-radius: 10px;
     }
 
     #message {
-      font-size: 2em;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 15px 25px;
+      font-size: 36px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
       border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="clock">--:--:--</div>
-  <div id="message">⏳ Waiting for next message v2...</div>
+  <div class="container">
+    <img src="https://i.postimg.cc/j5QZmW2Y/test-A.png" alt="Background Image">
+    <div class="overlay">
+      <div id="clock">--:--:--</div>
+      <div id="message">⏳ Waiting for next message...</div>
+    </div>
+  </div>
 
   <script>
     const clockElement = document.getElementById("clock");
     const messageElement = document.getElementById("message");
 
     const schedule = [
-      { hour: 15, minute: 25, message: "☀️ Good morning!" },
-      { hour: 15, minute: 35, message: "🍽️ Time for lunch!" },
-      { hour: 15, minute: 45, message: "☕ Afternoon break?" },
-      { hour: 16, minute: 0, message: "🌇 Evening already!" }
+      { hour: 16, minute: 30, message: "☀️ Good morning!" },
+      { hour: 17, minute: 00, message: "🍽️ Time for lunch!" },
+      { hour: 17, minute: 30, message: "☕ Afternoon break?" },
+      { hour: 18, minute: 0, message: "🌇 Evening already!" }
     ];
 
     let currentMessage = "";
@@ -81,6 +114,9 @@
       updateClock();
       updateMessage();
     }, 1000);
+
+    updateClock();
+    updateMessage();
   </script>
 </body>
 </html>
